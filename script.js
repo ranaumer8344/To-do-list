@@ -1,26 +1,37 @@
 // Adding Tasks
 
-document.querySelector('#push').onclick = function () {
-    document.querySelector('#tasks').innerHTML += `
+function addToTask(){
+
+    if(document.querySelector('.input-add-data input').value == 0){
+        alert('Please enter a value!');
+    } else{
+        document.querySelector('.tasks').innerHTML += `
         <div class="task">
             <div class="display-flex">
-                <span id="taskname">
-                    ${document.querySelector('#newtask input').value}
+                <span class="taskname">
+                    ${document.querySelector('.input-add-data input').value}
                 </span>
-                <button class="delete">
-                    Remove
-                </button>
+                <div class="actions">
+                    <button class="delete" onclick="removeTask()">
+                        Del
+                    </button>
+                    <button class="complete" onclick="completeTask()">
+                        Done
+                    </button>
+                </div>
             </div>
         </div>
     `;
-
-    // Adding Deleting
-
-    var current_tasks = document.querySelectorAll(".delete");
-    
-    for (var i = 0; i < current_tasks.length; i++) {
-        current_tasks[i].onclick = function () {
-            this.parentNode.remove();
-        }
+        document.querySelector('.input-add-data input').value = '';
     }
+    
+}
+
+function removeTask(){
+    var el = document.querySelector('.task');
+    el.remove();
+}
+
+function completeTask(){
+    document.querySelector('.task').classList.add("done");
 }
